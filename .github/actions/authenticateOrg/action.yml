@@ -1,0 +1,34 @@
+name: "Authenticate org"
+description: "Authenticate a Salesforce org"
+inputs:
+  auth-url:
+    description: "The auth URL for use with sf org login"
+    required: true
+  alias:
+    description: "Alias for the authenticated org"
+    required: true
+  setDefaultUsername:
+    description: Set the authenticated org as the default username that all commands run against.
+    required: true
+  setDefaultDevhubUsername:
+    description: Set the authenticated org as the default dev hub org for scratch org creation
+    required: true
+runs:
+  using: "composite"
+  steps:
+    # Authenticate org
+    - name: Authenticate org
+      run: |
+        echo ${{ inputs.auth-URL }} > ./SFDX_URL.txt
+        
+        if [ ${{ inputs.setDefaultUsername }} ] && [ ${{ inputs.setDefaultDevhubUsername }} ]; then
+          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default-dev-hub --set-default
+        elif [ ${{ inputs.setDefaultUsername }} ]; then
+          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default
+        elif [ ${{ inputs.setDefaultDevhubUsername }} ]; then
+          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default-dev-hub
+        else
+          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }}
+        fi
+        rm -f ./SFDX_URL.txt
+      shell: bash
