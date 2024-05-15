@@ -21,7 +21,7 @@ runs:
       run: |
         echo ${{ inputs.auth-url }} > ./SFDX_URL.txt
 
-        cat ./SFDX_URL.txt
+        cat SFDX_URL.txt
         
         if [ ${{ inputs.setDefaultUsername }} ] && [ ${{ inputs.setDefaultDevhubUsername }} ]; then
           sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default-dev-hub --set-default
