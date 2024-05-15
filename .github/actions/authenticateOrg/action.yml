@@ -21,11 +21,11 @@ runs:
     # Authenticate org
     - name: Authenticate org
       run: |
-        echo ${{ inputs.auth-url }} > ./SFDX_URL.txt
+        echo ${{ inputs.auth-URL }} > SFDX_URL.txt
 
-        cat ./SFDX_URL.txt
+        cat SFDX_URL.txt
 
-        command="sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }}"
+        command="sf org login sfdx-url --sfdx-url-file SFDX_URL.txt --alias ${{ inputs.alias }}"
 
         if [ ${{ inputs.setDefaultUsername }} ];
         then
@@ -44,10 +44,10 @@ runs:
         if [ $(jq .status loginResult.json) == 1 ];
         then
           echo "::error title=Failed to authenticate::$(jq .message authResult.json)"
-          rm -f ./SFDX_URL.txt
+          rm -f SFDX_URL.txt
           rm -f ./loginResult.json
         fi
 
-        rm -f ./SFDX_URL.txt
+        rm -f SFDX_URL.txt
         rm -f ./loginResult.json
       shell: bash
