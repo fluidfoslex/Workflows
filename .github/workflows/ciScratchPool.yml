@@ -18,7 +18,7 @@ on:
 
 jobs:
   updatePackageDependencies:
-    uses: navikt/crm-workflows-base/.github/workflows/ciUpdateDependencyVersionSfDxProject.yml@dxAtScale
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciUpdateDependencyVersionSfDxProject.yml@dxAtScale
     with:
       gitRef: ${{ inputs.gitRef || 'dxAtScale' }}
     secrets:
@@ -28,7 +28,7 @@ jobs:
 
   clearCiPool:
     if: github.event.schedule == '15 2 * * *'
-    uses: navikt/crm-workflows-base/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
     with:
       poolTag: "ci"
       deleteJobType: "allscratchorgs"
@@ -37,7 +37,7 @@ jobs:
 
   cleanupDevPool:
     if: github.event.schedule == '15 2 * * *'
-    uses: navikt/crm-workflows-base/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
     with:
       poolTag: "dev"
       deleteJobType: "unassigned"
@@ -54,7 +54,7 @@ jobs:
             "config/project-dev-pool-def.json",
             "config/project-ci-pool-def.json",
           ]
-    uses: navikt/crm-workflows-base/.github/workflows/ciCreateScratchPool.yml@dxAtScale
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciCreateScratchPool.yml@dxAtScale
     with:
       gitRef: ${{ inputs.gitRef || 'dxAtScale' }}
       poolConfigPath: ${{ matrix.poolConfigPath }}
@@ -66,7 +66,7 @@ jobs:
   deleteOrphans:
     if: ${{ always() }}
     needs: createPool
-    uses: navikt/crm-workflows-base/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
     with:
       deleteJobType: "orphans"
     secrets:
