@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 1
 
       - name:  'Authenticate Dev Hub'
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@dxAtScale
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@dxAtScale
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: devhub

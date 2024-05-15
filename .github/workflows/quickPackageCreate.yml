@@ -22,11 +22,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@main
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
 
       # Authenticate prod
       - name: Authorize PROD
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
