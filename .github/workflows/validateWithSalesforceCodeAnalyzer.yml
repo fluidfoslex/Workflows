@@ -20,11 +20,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: fluidfoslex/sf-workflows/.github/actions/installSF@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
 
       # Install Salesforce Code Analyzer
       - name: Install Salesforce Code Analyzer
-        uses: fluidfoslex/sf-workflows/.github/actions/installSalesforceCodeAnalyzer@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSalesforceCodeAnalyzer@main
 
       - name: Run copy pasta detection
         run: |

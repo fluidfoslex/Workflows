@@ -11,7 +11,7 @@ tput reset
 rm -f crm-workflows-base/.github/workflows/.DS_Store
 rm -f crm-workflows-base/.github/.DS_Store
 
-# merge directly to master branches on all repos
+# merge directly to main branches on all repos
 for folder in * ; do
 	cd $folder
 	echo "Folder: "$folder
@@ -24,7 +24,7 @@ for folder in * ; do
     fi
 
 	git stash >/dev/null 2>&1
-	git checkout master >/dev/null 2>&1
+	git checkout main >/dev/null 2>&1
 	git stash >/dev/null 2>&1
 	git pull >/dev/null 2>&1
 
@@ -34,7 +34,7 @@ for folder in * ; do
 
 	git add .github/* >/dev/null 2>&1
 	git commit -m "[AUTO] Updated Workflows" >/dev/null 2>&1
-	git push origin master >/dev/null 2>&1
+	git push origin main >/dev/null 2>&1
 
 	cd ..
 	echo ""

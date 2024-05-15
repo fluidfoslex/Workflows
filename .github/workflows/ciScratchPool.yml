@@ -28,7 +28,7 @@ jobs:
 
   clearCiPool:
     if: github.event.schedule == '15 2 * * *'
-    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@main
     with:
       poolTag: "ci"
       deleteJobType: "allscratchorgs"
@@ -37,7 +37,7 @@ jobs:
 
   cleanupDevPool:
     if: github.event.schedule == '15 2 * * *'
-    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@main
     with:
       poolTag: "dev"
       deleteJobType: "unassigned"
@@ -66,7 +66,7 @@ jobs:
   deleteOrphans:
     if: ${{ always() }}
     needs: createPool
-    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciDeletePool.yml@main
     with:
       deleteJobType: "orphans"
     secrets:
