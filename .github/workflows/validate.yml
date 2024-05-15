@@ -3,7 +3,7 @@ on:
   workflow_call:
 jobs:
   testValidate:
-    uses: navikt/crm-workflows-base/.github/workflows/ciValidate.yml@master
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciValidate.yml@master
     secrets: inherit
 
   # ################################################################# #
@@ -21,11 +21,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@master
 
       # Authenticate dev hub
       - name: Authenticate Dev Hub
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@master
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -103,7 +103,7 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@master
 
         # Download SCRATCH_ORG_SFDX_AUTH_URL.txt
       - name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
@@ -144,7 +144,7 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@master
 
       # Download SCRATCH_ORG_SFDX_AUTH_URL.txt
       - name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
@@ -282,11 +282,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: fluidfoslex/sf-workflows/.github/actions/installSF@master
 
       # Authenticate dev hub
       - name: Authenticate Dev Hub
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@master
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
