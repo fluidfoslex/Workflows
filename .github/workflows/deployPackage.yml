@@ -67,11 +67,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
+        uses: navikt/crm-workflows-base/.github/actions/installSF@master
 
       # Authorize SF
       - name: Authorize SF
-        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
         with:
           auth-url: ${{ env.target }}
           alias: targetOrg
@@ -94,7 +94,7 @@ jobs:
           rm output.json
 
       # Checkout source code
-      - name: Checkout source code from main
+      - name: Checkout source code from master
         uses: actions/checkout@v3
 
       # Deploy unpackagable content

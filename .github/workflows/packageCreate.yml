@@ -27,11 +27,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
+        uses: navikt/crm-workflows-base/.github/actions/installSF@master
 
       # Authorize Prod
       - name: Authorize PROD
-        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -63,7 +63,7 @@ jobs:
   validate-in-sit:
     name: Validate install in SIT Sandbox
     needs: [create-package]
-    uses: fluidfoslex/sf-workflows/.github/workflows/deployPackage.yml@main
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
     with:
       packageId: ${{ needs.create-package.outputs.packageId }}
       org: sit

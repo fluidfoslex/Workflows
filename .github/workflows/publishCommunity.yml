@@ -46,11 +46,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
+        uses: navikt/crm-workflows-base/.github/actions/installSF@master
 
       # Authorize SF
       - name: Authorize SF
-        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
         with:
           auth-url: ${{ env.target }}
           alias: targetOrg

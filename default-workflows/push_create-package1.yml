@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
     paths:
       - "force-app/**"
 jobs:
   create-package:
     name: Run Package Creation
-    uses: fluidfoslex/sf-workflows/.github/workflows/packageCreate.yml@main
+    uses: navikt/crm-workflows-base/.github/workflows/packageCreate.yml@master
     permissions:
       contents: write
     secrets: inherit

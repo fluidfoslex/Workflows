@@ -10,7 +10,7 @@ on:
 jobs:
   deploy-to-production:
     name: Deploy to Production
-    uses: fluidfoslex/sf-workflows/.github/workflows/deployPackage.yml@main
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
     permissions:
       contents: read
     with:
