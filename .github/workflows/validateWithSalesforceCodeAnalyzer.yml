@@ -20,11 +20,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: navikt/crm-workflows-base/.github/actions/installSF@main
 
       # Install Salesforce Code Analyzer
       - name: Install Salesforce Code Analyzer
-        uses: navikt/crm-workflows-base/.github/actions/installSalesforceCodeAnalyzer@master
+        uses: navikt/crm-workflows-base/.github/actions/installSalesforceCodeAnalyzer@main
 
       - name: Run copy pasta detection
         run: |

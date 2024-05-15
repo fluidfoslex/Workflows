@@ -32,9 +32,9 @@ jobs:
           if [ ${{ inputs.branchName }} != "" ]; then
             echo "branch=$(echo ${{ inputs.branchName }})" >> GITHUB_OUTPUT
             echo "'${{ inputs.branchName }}' was set as branch"
-          elif [ ${GITHUB_REF/refs\/heads\//} == "master" ] || [ ${GITHUB_REF/refs\/heads\//} == "main" ]; then
+          elif [ ${GITHUB_REF/refs\/heads\//} == "main" ] || [ ${GITHUB_REF/refs\/heads\//} == "main" ]; then
             echo ""
-            echo "::error::You didn't type a branch name and left the default main/master branch in the dropdown menu. You cannot push changes directly to master, please use a separate branch."
+            echo "::error::You didn't type a branch name and left the default main/main branch in the dropdown menu. You cannot push changes directly to main, please use a separate branch."
             exit 125
           else
             echo "branch=${GITHUB_REF/refs\/heads\//}" >> GITHUB_OUTPUT
@@ -51,11 +51,11 @@ jobs:
 
       # Install SFDX
       - name: Install SFDX
-        uses: navikt/crm-workflows-base/.github/actions/installSFDX@master
+        uses: navikt/crm-workflows-base/.github/actions/installSFDX@main
       
       # Authenticate dev hub
       - name: Authenticate Dev Hub
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -261,11 +261,11 @@ jobs:
       
       # Install SFDX
       - name: Install SFDX
-        uses: navikt/crm-workflows-base/.github/actions/installSFDX@master
+        uses: navikt/crm-workflows-base/.github/actions/installSFDX@main
       
       # Authenticate dev hub
       - name: Authenticate Dev Hub
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod

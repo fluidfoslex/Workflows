@@ -22,13 +22,13 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: navikt/crm-workflows-base/.github/actions/installSF@main
         with:
           version: 7.177.1
 
       # Authorize Prod
       - name: Authorize PROD
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -60,7 +60,7 @@ jobs:
   validate-in-sit:
     name: Validate install in SIT Sandbox
     needs: [create-package]
-    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@main
     with:
       packageId: ${{ needs.create-package.outputs.packageId }}
       org: sit

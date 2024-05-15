@@ -24,7 +24,7 @@ jobs:
 
   install-package-preprod:
     name: Validate install in PREPROD
-    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@main
     with:
       packageId: ${{ github.event.inputs.packageId  }}
       org: preprod
@@ -33,7 +33,7 @@ jobs:
 
   install-package-uat:
     name: Install package in UAT
-    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@main
     with:
       packageId: ${{ github.event.inputs.packageId  }}
       org: crm-uat
@@ -49,7 +49,7 @@ jobs:
     steps:
 
       # Checkout source code
-      - name: Checkout source code from master
+      - name: Checkout source code from main
         uses: actions/checkout@v3
         with:
           persist-credentials: false
@@ -57,11 +57,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: navikt/crm-workflows-base/.github/actions/installSF@main
 
       # Authenticate prod
       - name: Authorize PROD
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -72,8 +72,8 @@ jobs:
       - name: Promote package
         run: sf package version promote --package ${{ github.event.inputs.packageId }} --no-prompt
 
-  push-new-version-number-to-master:
-    name: Push new version number to master
+  push-new-version-number-to-main:
+    name: Push new version number to main
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -82,7 +82,7 @@ jobs:
     steps:
 
       # Checkout source code
-      - name: Checkout source code from master
+      - name: Checkout source code from main
         uses: actions/checkout@v3
         with:
           persist-credentials: false
@@ -91,7 +91,7 @@ jobs:
       # Update version number
       - name: Update version number
         id: packaging-updater
-        uses: navikt/crm-workflows-base/.github/actions/packageMinorVersionUpdater@master
+        uses: navikt/crm-workflows-base/.github/actions/packageMinorVersionUpdater@main
 
       # Create commit message by extracting the latest version number from sfdx-project.json
       - name: Build commit message
@@ -128,7 +128,7 @@ jobs:
     steps:
 
       # Checkout source code
-      - name: Checkout source code from master
+      - name: Checkout source code from main
         uses: actions/checkout@v3
         with:
           persist-credentials: true # ! set to true to be able to checkout correctly
@@ -136,11 +136,11 @@ jobs:
 
       # Install SF
       - name: Install SF
-        uses: navikt/crm-workflows-base/.github/actions/installSF@master
+        uses: navikt/crm-workflows-base/.github/actions/installSF@main
 
       # Authenticate prod
       - name: Authorize PROD
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@master
+        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod

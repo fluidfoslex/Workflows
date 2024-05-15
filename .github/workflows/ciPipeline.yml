@@ -40,7 +40,7 @@ jobs:
       contents: read
       packages: write
     secrets: inherit
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
 
   quickbuild:
     name: 'Quickbuild'
@@ -50,7 +50,7 @@ jobs:
       contents: read
       packages: write
     secrets: inherit
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
 
   deploy:
     name: 'Deploy'
@@ -73,7 +73,7 @@ jobs:
       packages: write
     needs: deploy
     concurrency: build 
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name:  'Checkout'
         uses: actions/checkout@v4

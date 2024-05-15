@@ -10,7 +10,7 @@ on:
 jobs:
   deploy-to-production:
     name: Deploy to Production
-    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@master
+    uses: navikt/crm-workflows-base/.github/workflows/deployPackage.yml@main
     permissions:
       contents: read
     with:
