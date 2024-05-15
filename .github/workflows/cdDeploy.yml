@@ -28,13 +28,13 @@ jobs:
           path: artifacts 
 
       - name:  'Authenticate Dev Hub'
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@dxAtScale
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@dxAtScale
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: devhub
           
       - name:  'Authenticate Sandbox'
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@dxAtScale
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@dxAtScale
         with:
           auth-url: ${{ secrets.AUTH_URL }}
           alias: dev

@@ -9,7 +9,7 @@ on:
 jobs:
   create-package:
     name: Run Package Creation
-    uses: navikt/crm-workflows-base/.github/workflows/packageCreate.yml@main
+    uses: fluidfoslex/sf-workflows/.github/workflows/packageCreate.yml@main
     permissions:
       contents: write
     secrets: inherit

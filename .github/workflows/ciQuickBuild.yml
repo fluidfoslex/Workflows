@@ -18,7 +18,7 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
 
-      - uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@dxAtScale
+      - uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@dxAtScale
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: devhub
@@ -30,7 +30,7 @@ jobs:
 
       # Removed due to issues with the rest of the pipelines
       # - name: 'Set package key'
-      #   uses: navikt/crm-workflows-base/.github/actions/setPackageVersionInstallationKeyFromBuildResult@dxAtScale
+      #   uses: fluidfoslex/sf-workflows/.github/actions/setPackageVersionInstallationKeyFromBuildResult@dxAtScale
       #   with:
       #     installationKey: ${{secrets.CRM_PACKAGE_KEY}}
 

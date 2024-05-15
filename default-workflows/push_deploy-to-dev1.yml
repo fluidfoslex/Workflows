@@ -17,11 +17,11 @@ jobs:
 
       # Install SFDX
       - name: Install SFDX
-        uses: navikt/crm-workflows-base/.github/actions/installSFDX@main
+        uses: fluidfoslex/sf-workflows/.github/actions/installSFDX@main
 
       # Authenticate prod
       - name: Authenticate prod
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: prod
@@ -30,7 +30,7 @@ jobs:
 
       # Authenticate dev sandbox
       - name: Authenticate dev sandbox
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@main
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.DEV_SFDX_URL }}
           alias: dev

@@ -35,7 +35,7 @@ on:
 jobs:
   validate:
     name: 'Validate'
-    uses: navikt/crm-workflows-base/.github/workflows/ciValidate.yml@dxAtScale
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciValidate.yml@dxAtScale
     permissions:
       contents: read
       packages: write
@@ -45,7 +45,7 @@ jobs:
   quickbuild:
     name: 'Quickbuild'
     needs: validate
-    uses: navikt/crm-workflows-base/.github/workflows/ciQuickBuild.yml@dxAtScale
+    uses: fluidfoslex/sf-workflows/.github/workflows/ciQuickBuild.yml@dxAtScale
     permissions:
       contents: read
       packages: write
@@ -54,7 +54,7 @@ jobs:
 
   deploy:
     name: 'Deploy'
-    uses: navikt/crm-workflows-base/.github/workflows/cdDeploy.yml@dxAtScale
+    uses: fluidfoslex/sf-workflows/.github/workflows/cdDeploy.yml@dxAtScale
     needs: quickbuild
     permissions:
       contents: read
@@ -81,7 +81,7 @@ jobs:
           fetch-depth: 0
 
       - name:  'Authenticate Dev Hub'
-        uses: navikt/crm-workflows-base/.github/actions/authenticateOrg@dxAtScale
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@dxAtScale
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
           alias: devhub
