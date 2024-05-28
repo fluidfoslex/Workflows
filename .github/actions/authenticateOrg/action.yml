@@ -19,7 +19,9 @@ runs:
     # Authenticate org
     - name: Authenticate org
       run: |
-        echo force://PlatformCLI::5Aep8610lkY9CyPXX2R123sIWA4SK47vqe.TBu2akHU3MWHj19u_T0s5fVoSmLZZOxEse_1kjCTwUckDBPhqX22@fluido166-dev-ed.develop.my.salesforce.com > ./SFDX_URL.txt
+        echo "${{ inputs.auth-url }}" > ./SFDX_URL.txt
+
         sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --set-default --alias integration
+      
         rm -f ./SFDX_URL.txt
       shell: bash
