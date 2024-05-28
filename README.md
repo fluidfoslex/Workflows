@@ -1,35 +1,47 @@
-# Workflows Base
+All workflows used for all SFDX projects in NAV.
 
-This repo contains reusable workflows for Salesforce development in NAV and is maintained by Team Platforce.
+# Installing
 
-## Short Guide
+Copy the [workflows](workflows) folder to .github/workflows in your repo.
 
-It is highly recommended to check out the GitHub docs on [reusing workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows) before starting to reuse these workflows.
-If your repository is not a part of [navikt](https://github.com/navikt) you also need to create the org secrets listed under secrets as repository secrets in your repository.
+# Secrets
 
-1. Create a workflow in your repository
-2. Reference the workflows used here
+## Required Environment Secrets
 
-## Workflow secrets
+SFDX Auth Url for production, pre-production and integration sandbox. Ask [@frodehoen](https://github.com/frodehoen) for assistance, by giving him admin access to your repo to add these auth URL secrets.
 
-Org secrets are maintained by Team Platforce
+- PROD_SFDX_URL `[REQUIRED]`
+- PREPROD_SFDX_URL `[REQUIRED]`
+- INTEGRATION_SANDBOX_SFDX_URL `[REQUIRED]`
 
-**List of org secrets:**\
-CRM_PROD_SFDX_URL\
-CRM_PREPROD_SFDX_URL\
-CRM_UAT_SFDX_URL\
-CRM_SIT_SFDX_URL\
-CRM_DEPLOYMENT_PAT\
-CRM_PACKAGE_KEY
+## Other Required Secrets
 
-### Running workflows toward dev sandboxes
+- PACKAGE_KEY `[REQUIRED]`
+  - The password for packages in NAV CRM
+- DEPLOYMENT_PAT `[REQUIRED]`
+  - The administrator of the repo needs to [create a PAT](https://docs.github.com/en/enterprise/2.17/user/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) with "REPO" access
 
-Dev sandboxes are owned and maintained by the individual teams. For use with the Platforce maintained workflows create a Repository Secret with the name DEV_SFDX_URL and the auth url belonging to a sandbox user with enough permissions for deploying.
+## Deployment to dev and UAT sandboxes
 
-## Requests
+SFDX Auth Url for dev and UAT sandboxes, which can be manually or automatically deployed when creating new packages. These sandboxes should be unique for each team or repo. See how to create [SFDX Auth URL](#SFDX-Auth-URL) below.
 
-Questions related to the code or project can be made as an issue.
+- UAT_SFDX_URL `[OPTIONAL]`
+- DEV_SFDX_URL `[OPTIONAL]`
+- DEPLOY_TO_DEV_AFTER_PACKAGE_CREATION `[OPTIONAL, VALID VALUES ARE 1 OR 0]`
+- DEPLOY_TO_UAT_AFTER_PACKAGE_CREATION `[OPTIONAL, VALID VALUES ARE 1 OR 0]`
 
-### For NAV-employees
+```java
+1 // auto-deploy to the respective sandbox
+0 // will NOT auto-deploy
+null // will NOT auto-deploy if the secret is not set
+```
 
-Internal requests can be made via Slack in #Platforce.
+# SFDX Auth URL
+
+Use the following command to get a SFDX Auth URL (see value for `Sfdx Auth Url`):
+
+```bash
+sfdx force:org:display -u [ORG_ALIAS] --verbose
+```
+
+Source: [Create your own SFDX Auth Url](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_view_info.htm)
