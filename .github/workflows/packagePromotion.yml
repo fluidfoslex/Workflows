@@ -164,22 +164,20 @@ jobs:
       #     mytoken: ${{ secrets.GITHUB_TOKEN }}
 
       # # create github release
-      # - name: Create GitHub Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag_name: ${{steps.release-fields.outputs.tagName}}
-      #     name: ${{steps.release-fields.outputs.releaseName}}
-      #     body: |
-      #       **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
-      #       **Package ID**: ${{ github.event.inputs.packageId }}
-      #       **Code Coverage**: ${{ steps.release-fields.outputs.codeCoverage }}%
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{steps.release-fields.outputs.tagName}}
+          name: ${{steps.release-fields.outputs.releaseName}}
+          body: |
+            **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
+            **Package ID**: ${{ github.event.inputs.packageId }}
+            **Code Coverage**: ${{ steps.release-fields.outputs.codeCoverage }}%
 
-      #       **Author**: ${{ github.actor }}
-      #       **Comment**: ${{ github.event.inputs.comment }}
+            **Author**: ${{ github.actor }}
+            **Comment**: ${{ github.event.inputs.comment }}
 
-      #       ## Changelog
-
-      #       ${{ steps.changelog.outputs.changelog }}
-      #     draft: false
-      #     prerelease: false
+            ## Changelog
+          draft: false
+          prerelease: false
