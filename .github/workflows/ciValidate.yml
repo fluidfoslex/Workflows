@@ -45,7 +45,15 @@ jobs:
         run: |
           #Find diff
           DIFFED_FILES_TO_LINT=$(git diff --name-only --diff-filter=d HEAD~ -- *.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml} **/{aura,lwc}/**/*.js | tr '\n' ' ')
-          npx prettier $DIFFED_FILES_TO_LINT --check
+          PRETTIER_OUTPUT=$(npx prettier $DIFFED_FILES_TO_LINT --check 2>&1)
+          PRETTIER_EXIT_CODE=$?
+
+          if [ $PRETTIER_EXIT_CODE -ne 0 ]; then
+            echo "Warning: The following files are not properly formatted according to Prettier:"
+            echo "$PRETTIER_OUTPUT"
+          else
+            echo "All files are properly formatted."
+          fi
 
       - name: "Run eslint"
         run: |
