@@ -17,8 +17,6 @@ runs:
   using: "composite"
   steps:
     # Authenticate org
-    # echo force://PlatformCLI::5Aep8610lkY9CyPXX2R123sIWA4SK47vqe.TBu2akHU3MWHj19u_T0s5fVoSmLZZOxEse_1kjCTwUckDBPhqX22@fluido166-dev-ed.develop.my.salesforce.com > ./SFDX_URL.txt
-    
     - name: Authenticate org
       
       run: |
