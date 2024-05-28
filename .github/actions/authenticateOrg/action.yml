@@ -20,15 +20,8 @@ runs:
     - name: Authenticate org
       run: |
         echo "${{ inputs.auth-url }}" > ./SFDX_URL.txt
-        
-        if [ ${{ inputs.setDefaultUsername }} ] && [ ${{ inputs.setDefaultDevhubUsername }} ]; then
-          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default-dev-hub --set-default
-        elif [ ${{ inputs.setDefaultUsername }} ]; then
-          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default
-        elif [ ${{ inputs.setDefaultDevhubUsername }} ]; then
-          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }} --set-default-dev-hub
-        else
-          sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --alias ${{ inputs.alias }}
-        fi
+
+        sf org login sfdx-url --sfdx-url-file ./SFDX_URL.txt --set-default --alias integration
+      
         rm -f ./SFDX_URL.txt
       shell: bash
