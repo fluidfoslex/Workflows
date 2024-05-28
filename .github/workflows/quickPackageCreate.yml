@@ -95,23 +95,22 @@ jobs:
       #     mytoken: ${{ secrets.GITHUB_TOKEN }}
 
       # create github release
-      # - name: Create Release
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag_name: ${{ steps.release-fields.outputs.tagName }}
-      #     name: ${{ steps.release-fields.outputs.releaseName }}
-      #     body: |
-      #       **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
-      #       **Package ID**: ${{ steps.release-fields.outputs.bodyPackage }}
-      #       **ALPHA**
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.release-fields.outputs.tagName }}
+          name: ${{ steps.release-fields.outputs.releaseName }}
+          body: |
+            **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
+            **Package ID**: ${{ steps.release-fields.outputs.bodyPackage }}
+            **ALPHA**
 
-      #       **Author**: ${{ github.actor }}
+            **Author**: ${{ github.actor }}
 
-      #       ${{ steps.release-fields.outputs.packageCreation }}
+            ${{ steps.release-fields.outputs.packageCreation }}
 
-      #       ## Changelog
+            ## Changelog
 
-      #       ${{ steps.changelog.outputs.changelog }}
-      #     draft: false
-      #     prerelease: true
+          draft: false
+          prerelease: true
