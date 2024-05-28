@@ -157,29 +157,29 @@ jobs:
           echo "codeCoverage=$( sf package version report --package ${{ github.event.inputs.packageId }} --json | jq '.result.CodeCoverage.apexCodeCoveragePercentage' -r )" >> $GITHUB_OUTPUT
 
       # Generate changelog from commits
-      - name: Generate changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v4.1.0
-        with:
-          mytoken: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Generate changelog
+      #   id: changelog
+      #   uses: metcalfc/changelog-generator@v4.1.0
+      #   with:
+      #     mytoken: ${{ secrets.GITHUB_TOKEN }}
 
-      # create github release
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{steps.release-fields.outputs.tagName}}
-          name: ${{steps.release-fields.outputs.releaseName}}
-          body: |
-            **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
-            **Package ID**: ${{ github.event.inputs.packageId }}
-            **Code Coverage**: ${{ steps.release-fields.outputs.codeCoverage }}%
+      # # create github release
+      # - name: Create GitHub Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag_name: ${{steps.release-fields.outputs.tagName}}
+      #     name: ${{steps.release-fields.outputs.releaseName}}
+      #     body: |
+      #       **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
+      #       **Package ID**: ${{ github.event.inputs.packageId }}
+      #       **Code Coverage**: ${{ steps.release-fields.outputs.codeCoverage }}%
 
-            **Author**: ${{ github.actor }}
-            **Comment**: ${{ github.event.inputs.comment }}
+      #       **Author**: ${{ github.actor }}
+      #       **Comment**: ${{ github.event.inputs.comment }}
 
-            ## Changelog
+      #       ## Changelog
 
-            ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
+      #       ${{ steps.changelog.outputs.changelog }}
+      #     draft: false
+      #     prerelease: false

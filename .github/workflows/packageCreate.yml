@@ -100,27 +100,27 @@ jobs:
             echo "integrationInstallation=❌ Package Installation (Integration Sandbox)" >> $GITHUB_OUTPUT
           fi
       # Generate changelog from commits
-      - name: Generate changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v4.3.1
-        with:
-          mytoken: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Generate changelog
+      #   id: changelog
+      #   uses: metcalfc/changelog-generator@v4.3.1
+      #   with:
+      #     mytoken: ${{ secrets.GITHUB_TOKEN }}
 
-      # create github release
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: ${{ steps.release-fields.outputs.tagName }}
-          name: ${{ steps.release-fields.outputs.releaseName }}
-          body: |
-            **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
-            **Package ID**: ${{ steps.release-fields.outputs.bodyPackage }}
-            **Code Coverage**: ${{ needs.create-package.outputs.codeCoverage }}%
-            **Author**: ${{ github.actor }}
-            ${{ steps.release-fields.outputs.packageCreation }}
-            ${{ steps.release-fields.outputs.integrationInstallation }}
-            ## Changelog
-            ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: true
+      # # create github release
+      # - name: Create Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag_name: ${{ steps.release-fields.outputs.tagName }}
+      #     name: ${{ steps.release-fields.outputs.releaseName }}
+      #     body: |
+      #       **Version**: ${{ steps.release-fields.outputs.bodyVersion }}
+      #       **Package ID**: ${{ steps.release-fields.outputs.bodyPackage }}
+      #       **Code Coverage**: ${{ needs.create-package.outputs.codeCoverage }}%
+      #       **Author**: ${{ github.actor }}
+      #       ${{ steps.release-fields.outputs.packageCreation }}
+      #       ${{ steps.release-fields.outputs.integrationInstallation }}
+      #       ## Changelog
+      #       ${{ steps.changelog.outputs.changelog }}
+      #     draft: false
+      #     prerelease: true
