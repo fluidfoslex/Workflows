@@ -42,7 +42,7 @@ jobs:
 
   promote-package:
     name: Promote Package
-    needs: [install-package-preprod]
+    needs: [install-package-uat]
     runs-on: ubuntu-latest
     permissions:
       contents: read
