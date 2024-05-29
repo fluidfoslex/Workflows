@@ -22,14 +22,14 @@ jobs:
           echo "Initiator: ${{ github.actor }}"
           echo "Comment: ${{ github.event.inputs.comment }}"
 
-  # install-package-preprod:
-  #   name: Validate install in PREPROD
-  #   uses: fluidfoslex/sf-workflows/.github/workflows/deployPackage.yml@main
-  #   with:
-  #     packageId: ${{ github.event.inputs.packageId  }}
-  #     org: preprod
-  #     unpackagable: ./force-app/unpackagable-with-auto-deploy
-  #   secrets: inherit
+  install-package-preprod:
+    name: Validate install in PREPROD
+    uses: fluidfoslex/sf-workflows/.github/workflows/deployPackage.yml@main
+    with:
+      packageId: ${{ github.event.inputs.packageId  }}
+      org: preprod
+      unpackagable: ./force-app/unpackagable-with-auto-deploy
+    secrets: inherit
 
   install-package-uat:
     name: Install package in UAT
@@ -42,7 +42,7 @@ jobs:
 
   promote-package:
     name: Promote Package
-    needs: [install-package-uat]
+    needs: [install-package-preprod]
     runs-on: ubuntu-latest
     permissions:
       contents: read
