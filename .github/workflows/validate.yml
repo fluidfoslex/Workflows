@@ -28,27 +28,27 @@ jobs:
         uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
         with:
           auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
-          alias: prod
+          alias: environment
           setDefaultUsername: true
           setDefaultDevhubUsername: true
 
       # Create scratch org
-      - name: Create scratch org
-        run: sf org create scratch --definition-file config/project-scratch-def.json --alias scratch-org --set-default --duration-days 1
+      #- name: Create scratch org
+      #  run: sf org create scratch --definition-file config/project-scratch-def.json --alias scratch-org --set-default --duration-days 1
 
       # Set SCRATCH_ORG_SFDX_AUTH_URL.txt
       # ! saves sf auth url as artifact to circumvent GitHub Actions censoring of the value (which occurs when used with job output)
       # ! artifact is later deleted
-      - name: Set SCRATCH_ORG_SFDX_AUTH_URL.txt
-        id: set-auth-url
-        run: sf org display --target-org scratch-org --verbose --json | jq '.result.sfdxAuthUrl' | sed 's/\"//g' > SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #- name: Set SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #  id: set-auth-url
+      #  run: sf org display --target-org scratch-org --verbose --json | jq '.result.sfdxAuthUrl' | sed 's/\"//g' > SCRATCH_ORG_SFDX_AUTH_URL.txt
 
       # Upload SCRATCH_ORG_SFDX_AUTH_URL.txt
-      - name: Upload SF AuthUrl
-        uses: actions/upload-artifact@v4
-        with:
-          name: sfdx-auth-url
-          path: SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #- name: Upload SF AuthUrl
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: sfdx-auth-url
+      #    path: SCRATCH_ORG_SFDX_AUTH_URL.txt
 
       # Install dependent packages
       - name: Install packages
@@ -83,7 +83,7 @@ jobs:
                   echo
                   echo ERROR: Could not install package $packageAlias
               else
-                  sf package install --target-org scratch-org --package $subscriberPackageVersionId --no-prompt --installation-key ${{ secrets.CRM_PACKAGE_KEY }} --wait 15 --publish-wait 10
+                  sf package install --target-org environment --package $subscriberPackageVersionId --no-prompt --installation-key ${{ secrets.CRM_PACKAGE_KEY }} --wait 15 --publish-wait 10
               fi
             done
           fi
@@ -106,14 +106,23 @@ jobs:
         uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
 
         # Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-      - name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-        uses: actions/download-artifact@v4
-        with:
-          name: sfdx-auth-url
+      #- name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: sfdx-auth-url
 
-      # Authenticate scratch org
-      - name: Authenticate scratch org
-        run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
+      ## Authenticate scratch org
+      #- name: Authenticate scratch org
+      #  run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
+
+      # Authorize SF
+      - name: Authorize SF
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
+        with:
+          auth-url: ${{ secrets.CRM_PROD_SFDX_URL }}
+          alias: prod
+          setDefaultUsername: true
+          setDefaultDevhubUsername: true
 
       # Delete unpackagable and scratch-org folder
       - name: Delete unpackagable
@@ -147,14 +156,23 @@ jobs:
         uses: fluidfoslex/sf-workflows/.github/actions/installSF@main
 
       # Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-      - name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-        uses: actions/download-artifact@v4
-        with:
-          name: sfdx-auth-url
+      #- name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: sfdx-auth-url
 
       # Authenticate scratch org
-      - name: Authenticate scratch org
-        run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
+      #- name: Authenticate scratch org
+      #  run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
+
+      # Authorize SF
+      - name: Authorize SF
+        uses: fluidfoslex/sf-workflows/.github/actions/authenticateOrg@main
+        with:
+          auth-url: ${{ secrets.CRM_PROD_SFDX_URL }} # set to correct env
+          alias: prod
+          setDefaultUsername: true
+          setDefaultDevhubUsername: true
 
       # Delete unpackagable and scratch-org folder
       - name: Delete unpackagable
@@ -294,22 +312,22 @@ jobs:
           setDefaultDevhubUsername: true
 
       # Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-      - name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
-        uses: actions/download-artifact@v4
-        with:
-          name: sfdx-auth-url
+      #- name: Download SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: sfdx-auth-url
 
-      # Authenticate scratch org
-      - name: Authenticate scratch org
-        run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
+      ## Authenticate scratch org
+      #- name: Authenticate scratch org
+      #  run: sf org login sfdx-url --sfdx-url-file ./SCRATCH_ORG_SFDX_AUTH_URL.txt --alias scratch-org --set-default
 
-      # Delete SCRATCH_ORG_SFDX_AUTH_URL.txt
-      - name: Delete SCRATCH_ORG_SFDX_AUTH_URL.txt
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: sfdx-auth-url
+      ## Delete SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #- name: Delete SCRATCH_ORG_SFDX_AUTH_URL.txt
+      #  uses: geekyeggo/delete-artifact@v5
+      #  with:
+      #    name: sfdx-auth-url
 
-      # Delete scratch orgs
-      - name: Delete scratch org
-        if: always()
-        run: sf org delete scratch --target-org=scratch-org --no-prompt
+      ## Delete scratch orgs
+      #- name: Delete scratch org
+      #  if: always()
+      #  run: sf org delete scratch --target-org=scratch-org --no-prompt
