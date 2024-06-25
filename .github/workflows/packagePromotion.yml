@@ -106,7 +106,6 @@ jobs:
         with:
           title: "Added new package version ID"
           commit-message: ${{steps.build-commit-message.outputs.message}}
-          branch: "auto/package-version-update"
 
           token: ${{ secrets.GITHUB_TOKEN }}
 
