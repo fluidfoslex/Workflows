@@ -1,4 +1,4 @@
-name: Deploy package
+name: Deploy metadata
 on:
   workflow_call:
     inputs:
