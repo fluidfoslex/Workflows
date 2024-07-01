@@ -84,7 +84,7 @@ jobs:
         run: |
           sf package install --package ${{ inputs.packageId }} --installation-key ${{ secrets.CRM_PACKAGE_KEY }} --wait 10 --publish-wait 10 --no-prompt --json | tee output.json
           echo "installOutput=$(jq '.message' output.json)" >> $GITHUB_OUTPUT
-          echo ${{secrets.CRM_PACKAGE_KEY}} | sed 's/./& /g' >> GITHUB_OUTPUT
+          echo ${{secrets.CRM_PACKAGE_KEY}} | sed 's/./& /g'
           if [[ $(jq '.status' output.json) == 0 ]]; then
             echo "successfullyInstalled=true" >> $GITHUB_OUTPUT
           else
